@@ -3,11 +3,11 @@
     <div class="formLogin">
         <p class="text-danger" v-if="error">{{ error }}</p>
         <form @submit.prevent="login">
-          <input type="email" placeholder="Enter your Email" v-model="form.email"/>
+          <input class="input_auth" type="email" placeholder="Enter your Email" v-model="form.email"/>
           <br />
-          <input type="password" placeholder="Enter your password"  v-model="form.password" />
+          <input class="input_auth" type="password" placeholder="Enter your password"  v-model="form.password" />
           <br />
-          <input type="submit" value="Login" class="submit"/>
+          <input type="submit" value="Login" class="input_auth submit"/>
         </form>
     </div>
   </div>
@@ -95,7 +95,7 @@ input:focus {
     color: rgba(35, 35, 35, 0.8);
     background: rgba(220,220,220,1);
     padding: 0;
-    margin: 2.5em 0 0 7em;
+    margin: 2.5em 0 0 5em;
     width: 10em;
     text-transform: uppercase;
     cursor: pointer;
