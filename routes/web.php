@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,4 +20,6 @@ Route::get('/', function () {
 
 Route::get('/{pathMatch}', function(){
     return view('welcome');
-})->where('pathMatch',"*");
+})->where('pathMatch',".*");
+
+
