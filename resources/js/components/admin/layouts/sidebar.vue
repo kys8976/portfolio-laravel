@@ -23,12 +23,12 @@
                     </router-link>
                 </li>
                 <li class="nav_item">
-                    <a class="nav_link" href="service.html">
+                    <router-link class="nav_link"  to="/admin/services">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Services </span>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav_item">
                     <a class="nav_link" href="skill.html">
@@ -105,6 +105,14 @@
                         </span>
                         <span class="nav_link--span--navname"> Functions </span>
                     </a>
+                </li>
+                <li class="nav_item">
+                    <router-link class="nav_link"  to="/admin/boards">
+                        <span class="nav_link--span--icon">
+                            <i class="fas fa-home nav__link--icon"> </i>
+                        </span>
+                        <span class="nav_link--span--navname"> Boards </span>
+                    </router-link>
                 </li>
             </ul>
         </div>
