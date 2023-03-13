@@ -13,12 +13,15 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
+    return view('home');
+});
+
+Route::get('/admin', function () {
     return view('welcome');
 });
 
-Route::get('/{pathMatch}', function(){
+Route::get('/admin/{pathMatch}', function(){
     return view('welcome');
 })->where('pathMatch',".*");
 

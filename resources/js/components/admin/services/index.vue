@@ -67,17 +67,28 @@
                             <p>Actions</p>
                         </div>
                         <!-- items -->
-                        <div class="service_table-items" v-if="services.length > 0" v-for="item in services" :key="item.id">
+                        <div
+                            class="service_table-items"
+                            v-if="services.length > 0"
+                            v-for="item in services"
+                            :key="item.id"
+                        >
                             <p>{{ item.name }}</p>
                             <button class="service_table-icon">
                                 <i class="{{ item.icon }}"></i>
                             </button>
                             <p>{{ item.description }}</p>
                             <div>
-                                <button class="btn-icon success">
+                                <button
+                                    class="btn-icon success"
+                                    @click="editModal(item)"
+                                >
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>
-                                <button class="btn-icon danger">
+                                <button
+                                    class="btn-icon danger"
+                                    @click="deleteService(item.id)"
+                                >
                                     <i class="far fa-trash-alt"></i>
                                 </button>
                             </div>
@@ -92,10 +103,19 @@
                             @click="closeModal()"
                             >×</span
                         >
-                        <h3 class="modal__title">Add Service</h3>
+                        <h3 class="modal__title" v-show="editMode == false">
+                            Add Service
+                        </h3>
+                        <h3 class="modal__title" v-show="editMode == true">
+                            Update Service
+                        </h3>
                         <hr class="modal_line" />
                         <br />
-                        <form @submit.prevent="createService()">
+                        <form
+                            @submit.prevent="
+                                editMode ? updateService() : createService()
+                            "
+                        >
                             <div>
                                 <p>Service Name</p>
                                 <input
@@ -131,9 +151,16 @@
                                     Cancel
                                 </button>
                                 <button
-                                    class="btn btn-secondary btn__close--modal"
+                                    class="btn btn-secondary"
+                                    v-show="editMode == false"
                                 >
                                     Save
+                                </button>
+                                <button
+                                    class="btn btn-secondary"
+                                    v-show="editMode == true"
+                                >
+                                    Update
                                 </button>
                             </div>
                         </form>
@@ -156,6 +183,7 @@ let form = ref({
 });
 const showModal = ref(false);
 const hideModal = ref(true);
+const editMode = ref(true);
 
 onMounted(async () => {
     getServices();
@@ -164,26 +192,72 @@ onMounted(async () => {
 const getServices = async () => {
     let response = await axios.get("/api/get_all_service");
     console.log(response);
-    services.value = response.data.services
+    services.value = response.data.services;
 };
 
 const openModal = () => {
     showModal.value = !showModal.value;
+    editMode.value = false;
 };
 
 const closeModal = () => {
     showModal.value = !hideModal.value;
+    form.value = {};
 };
 
 const createService = async () => {
-    await axios.post("/api/create_service",form.value)
-        .then(response =>{
-            getServices()
-            closeModal()
+    console.log('create')
+    await axios.post("/api/create_service", form.value).then((response) => {
+        getServices();
+        closeModal();
+        toast.fire({
+            icon: "success",
+            title: "Service add Successfully",
+        });
+    });
+};
+
+const editModal = (service) => {
+    editMode.value = true;
+    showModal.value = !showModal.value;
+    form.value = service;
+};
+
+const updateService = async () => {
+    await axios
+        .post("/api/update_service/" + form.value.id, form.value)
+        .then((response) => {
+            getServices();
+            closeModal();
             toast.fire({
-                icon: 'success',
-                title: 'Service add Successfully'
-            })
-        })
-}
+                icon: "success",
+                title: "Service update Successfully",
+            });
+        });
+};
+
+const deleteService = async (id) => {
+    Swal.fire({
+        title: 'Are yot Sure ?',
+        text: "You can't go back",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmbuttonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    })
+    .then((result)=>{
+        if(result.value){
+             axios.get('/api/delete_service/'+id)
+        .then((response) => {
+            Swal.fire(
+                'Delete',
+                'Service delete successfully',
+                'success'
+            )
+            getServices()
+        });
+        }
+    })
+};
 </script>

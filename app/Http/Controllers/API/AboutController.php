@@ -36,6 +36,7 @@ class AboutController extends Controller
             }else{
                 $name = $about->photo;
             }
+            $about->photo = $name;
         }
 
         if($about->cv != $request->cv){
@@ -53,6 +54,7 @@ class AboutController extends Controller
             }else{
                 $namecv = $about->cv;
             }
+            $about->cv = $namecv;
         }
         $about->name = $request->name;
         $about->email = $request->email;
@@ -60,8 +62,6 @@ class AboutController extends Controller
         $about->address = $request->address;
         $about->description = $request->description;
         $about->tagline = $request->tagline;
-        $about->photo = $name;
-        $about->cv = $namecv;
         $about->save();
 
     }

@@ -6,13 +6,10 @@ import adminAboutIndex from "../components/admin/about/index.vue";
 import adminServiceIndex from "../components/admin/services/index.vue";
 import adminBoardIndex from "../components/admin/board/index.vue";
 
-//pages
-import homePageIndex from "../components/pages/home/index.vue";
 
 //login
 import login from "../components/auth/login.vue";
-
-import notFound from "../components/pages/home/index.vue";
+//import notFound from "../components/pages/notFound.vue";
 
 const routes = [
     {
@@ -51,15 +48,6 @@ const routes = [
             requiresAuth: true,
         },
     },
-    //pages
-    {
-        path: "/",
-        name: "home",
-        component: homePageIndex,
-        meta: {
-            requiresAuth: false,
-        },
-    },
     //login
     {
         path: "/login",
@@ -70,6 +58,7 @@ const routes = [
         },
     },
     //notFount
+/*
     {
         path: "/:pathMatch(.*)*",
         name: "notFound",
@@ -78,6 +67,7 @@ const routes = [
             requiresAuth: false,
         },
     },
+*/
 ];
 
 const router = createRouter({

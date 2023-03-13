@@ -28,4 +28,19 @@ class BoardController extends Controller
         $service->type = $request->type;
         $service->save();
     }
+
+    public function update_board(Request $request, $id){
+        $service = Board::find($id);
+        $this->validate($request,[
+            'name' => 'required'
+        ]);
+        $service->name = $request->name;
+        $service->type = $request->type;
+        $service->save();
+    }
+
+    public function delete_board(Request $request, $id){
+        $service = Board::findOrFail($id);
+        $service->delete();
+    }
 }

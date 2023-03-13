@@ -35,12 +35,16 @@ Route::controller(AboutController::class)->group(function(){
 Route::controller(ServiceController::class)->group(function(){
     Route::get('/get_all_service', [ServiceController::class, 'get_all_service']);
     Route::post('/create_service', [ServiceController::class, 'create_service']);
+    Route::post('/update_service/{id}', [ServiceController::class, 'update_service']);
+    Route::get('/delete_service/{id}', [ServiceController::class, 'delete_service']);
 });
 
 
 Route::controller(BoardController::class)->group(function(){
     Route::get('/get_all_board', [BoardController::class, 'get_all_board']);
     Route::post('/create_board', [BoardController::class, 'create_board']);
+    Route::post('/update_board/{id}', [BoardController::class, 'update_board']);
+    Route::get('/delete_board/{id}', [BoardController::class, 'delete_board']);
 });
 
 
