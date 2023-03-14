@@ -20,7 +20,7 @@
         <header class="header" id="header">
             <nav class="nav container">
                 <a href="#home" class="nav_logo">
-                    John Doe
+                    Andrew Kwon
                 </a>
 
                 <div class="nav_menu" id="nav-menu">
@@ -70,11 +70,11 @@
             <section class="home section" id="home">
                 <div class="home_container container grid">
                     <div class="home_img">
-                        <img src="assets/img/home.png" alt="">
+                        <img src="assets/img/home.png" alt="" style="margin-top: -50px; margin-left: -41px;">
                     </div>
 
                     <div class="home_data">
-                        <h1 class="home_title">Hi, I'am John Doe</h1>
+                        <h1 class="home_title">Hi, I'am Andrew Kwon</h1>
                         <h3 class="home_subtitle">FullStack Web developer</h3>
                         <p class="home_description">
                             High level experience in web design,fornt-en and backend development, producing quality work.
@@ -91,13 +91,13 @@
                         <div class="home_social">
                             <span class="home_social-follow">Follow Me</span>
                             <div class="home_social-links">
-                                <a href="https://www.linkedin.com" target="_blank" class="home_social-icon">
-                                    <i class="uil uil-linkedin-alt"></i>
+                                <a href="https://www.youtube.com/channel/UCfLOLYJKRCxd0KqvSMDIJgg" target="_blank" class="home_social-icon">
+                                    <i class="uil uil-youtube"></i>
                                 </a>
                                 <a href="https://www.dribbble.com" target="_blank" class="home_social-icon">
                                     <i class="uil uil-dribbble"></i>
                                 </a>
-                                <a href="https://www.github.com" target="_blank" class="home_social-icon">
+                                <a href="https://www.github.com/kys8976" target="_blank" class="home_social-icon">
                                     <i class="uil uil-github-alt"></i>
                                 </a>
                             </div>
@@ -136,7 +136,7 @@
                <span class="section__subtitle">My introduction</span>
 
                <div class="about_container container grid">
-                 <img src="assets/img/about-img.png" alt="" class="about_img">
+                 <img src="assets/img/about-img.png" alt="" class="about_img" style="">
 
                  <div class="about_data">
                     <p class="about_description">
@@ -188,7 +188,7 @@
                         <div class="skills_list grid">
                             <div class="skills_data">
                                 <div class="skills_titles">
-                                    <h3 class="skills_name">HTML</h3>
+                                    <h3 class="skills_name">HTML/CSS/SCSS</h3>
                                     <span class="skills_number">90%</span>
                                 </div>
                                 <div class="skills_bar">
@@ -197,7 +197,7 @@
                             </div>
                             <div class="skills_data">
                                 <div class="skills_titles">
-                                    <h3 class="skills_name">CSS</h3>
+                                    <h3 class="skills_name">JavaScript</h3>
                                     <span class="skills_number">80%</span>
                                 </div>
                                 <div class="skills_bar">
@@ -206,7 +206,7 @@
                             </div>
                             <div class="skills_data">
                                 <div class="skills_titles">
-                                    <h3 class="skills_name">JavaScript</h3>
+                                    <h3 class="skills_name">Vue.js</h3>
                                     <span class="skills_number">60%</span>
                                 </div>
                                 <div class="skills_bar">
@@ -222,7 +222,7 @@
 
                             <div>
                                 <h1 class="skills_title">Backend developer</h1>
-                                <span class="skills_subtitle">More than 7 years</span>
+                                <span class="skills_subtitle">More than 6 years</span>
                             </div>
 
                             <i class="uil uil-angle-down skills_arrow"></i>
@@ -230,7 +230,7 @@
                         <div class="skills_list grid">
                             <div class="skills_data">
                                 <div class="skills_titles">
-                                    <h3 class="skills_name">PHP</h3>
+                                    <h3 class="skills_name">PHP/Laravel</h3>
                                     <span class="skills_number">80%</span>
                                 </div>
                                 <div class="skills_bar">
@@ -239,7 +239,7 @@
                             </div>
                             <div class="skills_data">
                                 <div class="skills_titles">
-                                    <h3 class="skills_name">Node J6</h3>
+                                    <h3 class="skills_name">Node JS</h3>
                                     <span class="skills_number">80%</span>
                                 </div>
                                 <div class="skills_bar">
@@ -248,8 +248,8 @@
                             </div>
                             <div class="skills_data">
                                 <div class="skills_titles">
-                                    <h3 class="skills_name">Python</h3>
-                                    <span class="skills_number">60%</span>
+                                    <h3 class="skills_name">Mysql/Mssql/Progressql</h3>
+                                    <span class="skills_number">70%</span>
                                 </div>
                                 <div class="skills_bar">
                                     <span class="skills_percentage skills_python"></span>
@@ -257,8 +257,8 @@
                             </div>
                             <div class="skills_data">
                                 <div class="skills_titles">
-                                    <h3 class="skills_name">Ruby</h3>
-                                    <span class="skills_number">55%</span>
+                                    <h3 class="skills_name">Ionic</h3>
+                                    <span class="skills_number">50%</span>
                                 </div>
                                 <div class="skills_bar">
                                     <span class="skills_percentage skills_ruby"></span>
@@ -274,7 +274,7 @@
                             <i class="uil uil-server-network skills_icon"></i>
 
                             <div>
-                                <h1 class="skills_title">Designer</h1>
+                                <h1 class="skills_title">Web Collaboration tools</h1>
                                 <span class="skills_subtitle">More than 5 years</span>
                             </div>
 
@@ -283,7 +283,7 @@
                         <div class="skills_list grid">
                             <div class="skills_data">
                                 <div class="skills_titles">
-                                    <h3 class="skills_name">Figma</h3>
+                                    <h3 class="skills_name">Github</h3>
                                     <span class="skills_number">90%</span>
                                 </div>
                                 <div class="skills_bar">
@@ -292,7 +292,25 @@
                             </div>
                             <div class="skills_data">
                                 <div class="skills_titles">
-                                    <h3 class="skills_name">Sketch</h3>
+                                    <h3 class="skills_name">Gitlab</h3>
+                                    <span class="skills_number">85%</span>
+                                </div>
+                                <div class="skills_bar">
+                                    <span class="skills_percentage skills_photoshop"></span>
+                                </div>
+                            </div>
+                            <div class="skills_data">
+                                <div class="skills_titles">
+                                    <h3 class="skills_name">Bitbucket</h3>
+                                    <span class="skills_number">85%</span>
+                                </div>
+                                <div class="skills_bar">
+                                    <span class="skills_percentage skills_photoshop"></span>
+                                </div>
+                            </div>
+                            <div class="skills_data">
+                                <div class="skills_titles">
+                                    <h3 class="skills_name">Trello</h3>
                                     <span class="skills_number">85%</span>
                                 </div>
                                 <div class="skills_bar">
@@ -301,7 +319,7 @@
                             </div>
                             <div class="skills_data">
                                 <div class="skills_titles">
-                                    <h3 class="skills_name">Adobe XD</h3>
+                                    <h3 class="skills_name">Slack</h3>
                                     <span class="skills_number">80%</span>
                                 </div>
                                 <div class="skills_bar">
@@ -310,7 +328,25 @@
                             </div>
                             <div class="skills_data">
                                 <div class="skills_titles">
-                                    <h3 class="skills_name">Photoshop</h3>
+                                    <h3 class="skills_name">Redmine</h3>
+                                    <span class="skills_number">85%</span>
+                                </div>
+                                <div class="skills_bar">
+                                    <span class="skills_percentage skills_photoshop"></span>
+                                </div>
+                            </div>
+                            <div class="skills_data">
+                                <div class="skills_titles">
+                                    <h3 class="skills_name">Zeplin</h3>
+                                    <span class="skills_number">85%</span>
+                                </div>
+                                <div class="skills_bar">
+                                    <span class="skills_percentage skills_photoshop"></span>
+                                </div>
+                            </div>
+                            <div class="skills_data">
+                                <div class="skills_titles">
+                                    <h3 class="skills_name">Sentry</h3>
                                     <span class="skills_number">85%</span>
                                 </div>
                                 <div class="skills_bar">
@@ -869,7 +905,7 @@
           <div class="footer_bg">
             <div class="footer_container container grid">
                 <div>
-                    <h1 class="footer_title">John Doe</h1>
+                    <h1 class="footer_title">Andrew Kwon</h1>
                     <span class="footer_subtitle">FullStack Web developer</span>
                     <p class="footer_subtitle">
                         High level experience in web design,

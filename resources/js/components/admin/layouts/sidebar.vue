@@ -7,7 +7,7 @@
             </span>
             <ul class="nav_list">
                 <li class="nav_item">
-                    <router-link class="nav_link nav__active" to="/admin/home">
+                    <router-link :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" to="/admin/home">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
@@ -15,7 +15,7 @@
                     </router-link>
                 </li>
                 <li class="nav_item">
-                    <router-link class="nav_link"  to="/admin/about">
+                    <router-link :class="[{'nav__active': $route.name === 'adminAbout'}, 'nav_link']" to="/admin/about">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
@@ -23,7 +23,7 @@
                     </router-link>
                 </li>
                 <li class="nav_item">
-                    <router-link class="nav_link"  to="/admin/services">
+                    <router-link :class="[{'nav__active': $route.name === 'adminService'}, 'nav_link']" to="/admin/services">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
@@ -31,15 +31,15 @@
                     </router-link>
                 </li>
                 <li class="nav_item">
-                    <a class="nav_link" href="skill.html">
+                    <router-link :class="[{'nav__active': $route.name === 'adminSkills'}, 'nav_link']" to="/admin/skills">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Skills </span>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav_item">
-                    <a class="nav_link" href="education.html">
+                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="education.html">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav_item">
-                    <a class="nav_link" href="experience.html">
+                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="experience.html">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li class="nav_item">
-                    <a class="nav_link" href="project.html">
+                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="project.html">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
@@ -65,7 +65,7 @@
                     </a>
                 </li>
                 <li class="nav_item">
-                    <a class="nav_link" href="#">
+                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="#">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
@@ -75,7 +75,7 @@
                     </a>
                 </li>
                 <li class="nav_item">
-                    <a class="nav_link" href="#">
+                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="#">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
@@ -83,7 +83,7 @@
                     </a>
                 </li>
                 <li class="nav_item">
-                    <a class="nav_link" href="#">
+                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="#">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
@@ -91,7 +91,7 @@
                     </a>
                 </li>
                 <li class="nav_item">
-                    <a class="nav_link" href="#">
+                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="#">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
@@ -99,7 +99,7 @@
                     </a>
                 </li>
                 <li class="nav_item">
-                    <a class="nav_link" href="#">
+                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="#">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
@@ -107,7 +107,7 @@
                     </a>
                 </li>
                 <li class="nav_item">
-                    <router-link class="nav_link"  to="/admin/boards">
+                    <router-link :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" to="/admin/boards">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
