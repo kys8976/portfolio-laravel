@@ -3,19 +3,19 @@
     <main class="main">
         <div class="main__sideNav"></div>
         <div class="main__content">
-            <!--==================== SERVICES ====================-->
-            <section class="services section" id="services">
-                <div class="boards_container">
+            <!--==================== posts ====================-->
+            <section class="posts section" id="posts">
+                <div class="posts_container">
                     <div class="titlebar">
                         <div class="titlebar_item">
-                            <h1>Boards</h1>
+                            <h1>posts</h1>
                         </div>
                         <div class="titlebar_item">
                             <div
                                 class="btn btn__open--modal"
                                 @click="openModal()"
                             >
-                                New Board
+                                New post
                             </div>
                         </div>
                     </div>
@@ -40,7 +40,6 @@
 
                         <div class="table_search">
                             <div class="table_search-wrapper">
-
                                 <select
                                     class="table_search-select"
                                     name=""
@@ -56,25 +55,23 @@
                                 <input
                                     class="table_search--input"
                                     type="text"
-                                    placeholder="Search Service"
+                                    placeholder="Search post"
                                 />
                             </div>
                         </div>
 
-                        <div class="boards_table-heading">
+                        <div class="post_table-heading">
                             <p>Title</p>
-                            <p>Type</p>
                             <p>Actions</p>
                         </div>
                         <!-- items -->
                         <div
-                            class="boards_table-items"
-                            v-if="boards.length > 0"
-                            v-for="item in boards"
+                            class="post_table-items"
+                            v-if="posts.length > 0"
+                            v-for="item in posts"
                             :key="item.id"
                         >
-                            <p>{{ item.name }}</p>
-                            <p>{{ item.type }}</p>
+                            <p>{{ item.title }}</p>
                             <div>
                                 <button
                                     class="btn-icon success"
@@ -82,8 +79,9 @@
                                 >
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>
-                                <button class="btn-icon danger"
-                                    @click="deleteService(item.id)"
+                                <button
+                                    class="btn-icon danger"
+                                    @click="deletePost(item.id)"
                                 >
                                     <i class="far fa-trash-alt"></i>
                                 </button>
@@ -91,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-                <!-------------- SERVICES MODAL --------------->
+                <!-------------- posts MODAL --------------->
                 <div class="modal main__modal" :class="{ show: showModal }">
                     <div class="modal__content">
                         <span
@@ -100,33 +98,42 @@
                             >×</span
                         >
                         <h3 class="modal__title" v-show="editMode == false">
-                            Add Service
+                            Add post
                         </h3>
                         <h3 class="modal__title" v-show="editMode == true">
-                            Update Service
+                            Update post
                         </h3>
                         <hr class="modal_line" />
                         <br />
-                        <form @submit.prevent=" editMode ?  updateService() : createService()">
-
+                        <form
+                            @submit.prevent="
+                                editMode ? updatePost() : createPost()
+                            "
+                        >
                             <div>
-                                <p>Board Name</p>
+                                <p>post Name</p>
                                 <input
                                     type="text"
                                     class="input"
                                     v-model="form.name"
                                 />
 
-                                <p>Board Type</p>
-                                <select
-                                    class="inputSelect"
-                                     v-model="form.type"
+                                <p>Icon Class</p>
+                                <input
+                                    type="text"
+                                    class="input"
+                                    v-model="form.icon"
+                                />
+                                <span style="color: #006fbb"
+                                    >Find your suitable icon: Font Awesome</span
                                 >
-                                    <option disabled>Select Board Type</option>
-                                    <option value="list">list</option>
-                                    <option value="event">event</option>
-                                    <option value="gallery">gallery</option>
-                                </select>
+
+                                <p>Description</p>
+                                <textarea
+                                    cols="10"
+                                    rows="5"
+                                    v-model="form.description"
+                                ></textarea>
                             </div>
                             <br />
                             <hr class="modal_line" />
@@ -162,24 +169,32 @@
 import { onMounted, ref } from "vue";
 import Base from "../layouts/base.vue";
 
+let posts = ref([]);
 let boards = ref([]);
 let form = ref({
     name: "",
-    type: "",
+    icon: "",
+    description: "",
 });
 const showModal = ref(false);
 const hideModal = ref(true);
 const editMode = ref(true);
 
 onMounted(async () => {
-    getServices();
+    getPosts();
+    getBoards();
 });
 
-const getServices = async () => {
-    let response = await axios.get("/api/get_all_board");
-    boards.value = response.data.services;
+const getPosts = async () => {
+    let response = await axios.get("/api/get_all_post");
+    posts.value = response.data.posts;
 };
 
+const getBoards = async () => {
+    let response = await axios.get("/api/get_all_board");
+    console.log(response);
+    boards.value = response.data.boards;
+};
 const openModal = () => {
     showModal.value = !showModal.value;
     editMode.value = false;
@@ -190,39 +205,38 @@ const closeModal = () => {
     form.value = {};
 };
 
-const createService = async () => {
-    console.log("create");
-    await axios.post("/api/create_board", form.value).then((response) => {
-        getServices();
+const createPost = async () => {
+    console.log('create')
+    await axios.post("/api/create_post", form.value).then((response) => {
+        getPosts();
         closeModal();
         toast.fire({
             icon: "success",
-            title: "Service add Successfully",
+            title: "post add Successfully",
         });
     });
 };
 
-const editModal = (service) => {
-    console.log(service);
+const editModal = (post) => {
     editMode.value = true;
     showModal.value = !showModal.value;
-    form.value = service;
+    form.value = post;
 };
 
-const updateService = async () => {
+const updatePost = async () => {
     await axios
-        .post("/api/update_board/" + form.value.id, form.value)
+        .post("/api/update_post/" + form.value.id, form.value)
         .then((response) => {
-            getServices();
+            getPosts();
             closeModal();
             toast.fire({
                 icon: "success",
-                title: "Board update Successfully",
+                title: "post update Successfully",
             });
         });
 };
 
-const deleteService = async (id) => {
+const deletePost = async (id) => {
     Swal.fire({
         title: 'Are yot Sure ?',
         text: "You can't go back",
@@ -234,14 +248,14 @@ const deleteService = async (id) => {
     })
     .then((result)=>{
         if(result.value){
-             axios.get('/api/delete_board/'+id)
+             axios.get('/api/delete_post/'+id)
         .then((response) => {
             Swal.fire(
                 'Delete',
-                'Board delete successfully',
+                'post delete successfully',
                 'success'
             )
-            getServices()
+            getPosts()
         });
         }
     })

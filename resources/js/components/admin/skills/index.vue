@@ -38,7 +38,7 @@
                             <div class="table_search-wrapper">
                                 <select
                                     v-model="form.name"
-                                    class="table_search-select"
+                                    class="inputSelect"
                                     name=""
                                     id=""
                                 >

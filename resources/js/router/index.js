@@ -6,6 +6,8 @@ import adminAboutIndex from "../components/admin/about/index.vue";
 import adminServiceIndex from "../components/admin/services/index.vue";
 import adminSkillIndex from "../components/admin/skills/index.vue";
 import adminBoardIndex from "../components/admin/board/index.vue";
+import adminBoardPost from "../components/admin/board/post.vue";
+
 
 
 //login
@@ -41,7 +43,7 @@ const routes = [
         },
     },
     {
-        //service
+        //skills
         path: "/admin/skills",
         name: "adminSkills",
         component: adminSkillIndex,
@@ -49,12 +51,20 @@ const routes = [
             requiresAuth: true,
         },
     },
-
     {
         //board
         path: "/admin/boards",
         name: "adminBoard",
         component: adminBoardIndex,
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
+        //post
+        path: "/admin/post/:id",
+        name: "adminPost",
+        component: adminBoardPost,
         meta: {
             requiresAuth: true,
         },

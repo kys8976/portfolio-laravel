@@ -7,6 +7,7 @@ use App\Http\Controllers\API\AboutController;
 use App\Http\Controllers\API\ServiceController;
 use App\Http\Controllers\API\SkillController;
 use App\Http\Controllers\API\BoardController;
+use App\Http\Controllers\API\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,5 +54,13 @@ Route::controller(BoardController::class)->group(function(){
     Route::post('/update_board/{id}', [BoardController::class, 'update_board']);
     Route::get('/delete_board/{id}', [BoardController::class, 'delete_board']);
 });
+
+Route::controller(PostController::class)->group(function(){
+    Route::get('/get_all_post','get_all_post');
+    Route::post('/create_post','create_post');
+    Route::post('/update_post/{id}','update_post');
+    Route::get('/delete_post/{id}','delete_post');
+});
+
 
 

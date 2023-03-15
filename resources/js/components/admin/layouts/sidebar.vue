@@ -17,7 +17,7 @@
                 <li class="nav_item">
                     <router-link :class="[{'nav__active': $route.name === 'adminAbout'}, 'nav_link']" to="/admin/about">
                         <span class="nav_link--span--icon">
-                            <i class="fas fa-home nav__link--icon"> </i>
+                            <i class="fas fa-address-card nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> About Us </span>
                     </router-link>
@@ -25,7 +25,7 @@
                 <li class="nav_item">
                     <router-link :class="[{'nav__active': $route.name === 'adminService'}, 'nav_link']" to="/admin/services">
                         <span class="nav_link--span--icon">
-                            <i class="fas fa-home nav__link--icon"> </i>
+                            <i class="fas fa-desktop nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Services </span>
                     </router-link>
@@ -33,7 +33,7 @@
                 <li class="nav_item">
                     <router-link :class="[{'nav__active': $route.name === 'adminSkills'}, 'nav_link']" to="/admin/skills">
                         <span class="nav_link--span--icon">
-                            <i class="fas fa-home nav__link--icon"> </i>
+                            <i class="fas fa-wrench nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Skills </span>
                     </router-link>
@@ -41,7 +41,7 @@
                 <li class="nav_item">
                     <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="education.html">
                         <span class="nav_link--span--icon">
-                            <i class="fas fa-home nav__link--icon"> </i>
+                            <i class="fas fa-graduation-cap nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Education </span>
                     </a>
@@ -49,7 +49,7 @@
                 <li class="nav_item">
                     <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="experience.html">
                         <span class="nav_link--span--icon">
-                            <i class="fas fa-home nav__link--icon"> </i>
+                            <i class="fas fa-blind nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname">
                             Experiences
@@ -59,7 +59,7 @@
                 <li class="nav_item">
                     <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="project.html">
                         <span class="nav_link--span--icon">
-                            <i class="fas fa-home nav__link--icon"> </i>
+                            <i class="fas fa-folder-open nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Projects </span>
                     </a>
@@ -77,7 +77,7 @@
                 <li class="nav_item">
                     <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="#">
                         <span class="nav_link--span--icon">
-                            <i class="fas fa-home nav__link--icon"> </i>
+                            <i class="fa fa-envelope nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Messages </span>
                     </a>
@@ -85,7 +85,7 @@
                 <li class="nav_item">
                     <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="#">
                         <span class="nav_link--span--icon">
-                            <i class="fas fa-home nav__link--icon"> </i>
+                            <i class="fas fa-user nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Users </span>
                     </a>
@@ -93,25 +93,28 @@
                 <li class="nav_item">
                     <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="#">
                         <span class="nav_link--span--icon">
-                            <i class="fas fa-home nav__link--icon"> </i>
+                            <i class="fas fa-cog nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Setting </span>
                     </a>
                 </li>
                 <li class="nav_item">
-                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="#">
+                    <router-link :class="[{'nav__active': $route.name === 'adminBoard'}, 'nav_link']" to="/admin/boards">
                         <span class="nav_link--span--icon">
-                            <i class="fas fa-home nav__link--icon"> </i>
-                        </span>
-                        <span class="nav_link--span--navname"> Functions </span>
-                    </a>
-                </li>
-                <li class="nav_item">
-                    <router-link :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" to="/admin/boards">
-                        <span class="nav_link--span--icon">
-                            <i class="fas fa-home nav__link--icon"> </i>
+                            <i class="fas fa-book nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Boards </span>
+                    </router-link>
+                </li>
+                <li class="nav_item"
+                    v-if="boards.length > 0"
+                    v-for="item in boards"
+                    :key="item.id">
+                    <router-link :class="[{'nav__active': $route.name === 'adminPost' && $route.params.id == item.id }, 'nav_link']" :to="'/admin/post/'+item.id" style="margin-left:5px;">
+                        <span class="nav_link--span--icon">
+                            <i class="fas fa-arrow-right nav__link--icon"> </i>
+                        </span>
+                        <span class="nav_link--span--navname"> {{ item.name }} </span>
                     </router-link>
                 </li>
             </ul>
@@ -119,3 +122,17 @@
     </nav>
     <!-- End Nav Main -->
 </template>
+<script setup>
+import { onMounted, ref } from "vue";
+
+let boards = ref([]);
+
+onMounted(async () => {
+    getBoards();
+});
+
+const getBoards = async () => {
+    let response = await axios.get("/api/get_all_board");
+    boards.value = response.data.services;
+};
+</script>
