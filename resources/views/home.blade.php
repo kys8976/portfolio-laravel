@@ -857,7 +857,7 @@
 
                         <div>
                             <h3 class="contact_title">Email</h3>
-                            <span class="contact_subtitle">johndoe@gmail.com</span>
+                            <span class="contact_subtitle">andrewkwon@gmail.com</span>
                         </div>
                     </div>
                     <div class="contact_information">

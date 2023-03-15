@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\AboutController;
 use App\Http\Controllers\API\ServiceController;
+use App\Http\Controllers\API\SkillController;
 use App\Http\Controllers\API\BoardController;
 
 /*
@@ -28,17 +29,23 @@ Route::controller(AuthController::class)->group(function(){
 });
 
 Route::controller(AboutController::class)->group(function(){
-    Route::get('/edit_about', [AboutController::class, 'edit_about']);
-    Route::post('/update_about/{id}', [AboutController::class, 'update_about']);
+    Route::get('/edit_about','edit_about');
+    Route::post('/update_about/{id}','update_about');
 });
 
 Route::controller(ServiceController::class)->group(function(){
-    Route::get('/get_all_service', [ServiceController::class, 'get_all_service']);
-    Route::post('/create_service', [ServiceController::class, 'create_service']);
-    Route::post('/update_service/{id}', [ServiceController::class, 'update_service']);
-    Route::get('/delete_service/{id}', [ServiceController::class, 'delete_service']);
+    Route::get('/get_all_service','get_all_service');
+    Route::post('/create_service','create_service');
+    Route::post('/update_service/{id}','update_service');
+    Route::get('/delete_service/{id}','delete_service');
 });
 
+Route::controller(SkillController::class)->group(function(){
+    Route::get('/get_all_skill','get_all_skill');
+    Route::post('/create_skill', 'create_skill');
+    Route::post('/update_skill/{id}','update_skill');
+    Route::get('/delete_skill/{id}','delete_skill');
+});
 
 Route::controller(BoardController::class)->group(function(){
     Route::get('/get_all_board', [BoardController::class, 'get_all_board']);
