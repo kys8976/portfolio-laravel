@@ -106,15 +106,12 @@
                         <span class="nav_link--span--navname"> Boards </span>
                     </router-link>
                 </li>
-                <li class="nav_item"
-                    v-if="boards.length > 0"
-                    v-for="item in boards"
-                    :key="item.id">
-                    <router-link :class="[{'nav__active': $route.name === 'adminPost' && $route.params.id == item.id }, 'nav_link']" :to="'/admin/post/'+item.id" style="margin-left:5px;">
+                <li class="nav_item">
+                    <router-link :class="[{'nav__active': $route.name === 'adminPost' }, 'nav_link']" :to="'/admin/post'" style="margin-left:5px;">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-arrow-right nav__link--icon"> </i>
                         </span>
-                        <span class="nav_link--span--navname"> {{ item.name }} </span>
+                        <span class="nav_link--span--navname"> Posts </span>
                     </router-link>
                 </li>
             </ul>
@@ -122,17 +119,3 @@
     </nav>
     <!-- End Nav Main -->
 </template>
-<script setup>
-import { onMounted, ref } from "vue";
-
-let boards = ref([]);
-
-onMounted(async () => {
-    getBoards();
-});
-
-const getBoards = async () => {
-    let response = await axios.get("/api/get_all_board");
-    boards.value = response.data.services;
-};
-</script>

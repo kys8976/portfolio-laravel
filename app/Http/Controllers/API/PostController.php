@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function get_all_post(){
+    public function get_all_post(Request $request){
 
-        $posts = Post::orderBy('id','DESC')->get();
+        $posts = Post::with('board')->orderBy('id','DESC')->get();
 
         return response()->json([
             'posts' => $posts
@@ -20,22 +20,28 @@ class PostController extends Controller
     public function create_post(Request $request){
 
         $this->validate($request,[
-            'name' => 'required'
+            'title' => 'required',
+            'content' => 'required',
+            'board_id' => 'required'
         ]);
 
         $post = new Post();
-        $post->name = $request->name;
-        $post->type = $request->type;
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->board_id = $request->board_id;
         $post->save();
     }
 
     public function update_post(Request $request, $id){
         $post = Post::find($id);
         $this->validate($request,[
-            'name' => 'required'
+            'title' => 'required',
+            'content' => 'required',
+            'board_id' => 'required'
         ]);
-        $post->name = $request->name;
-        $post->type = $request->type;
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->board_id = $request->board_id;
         $post->save();
     }
 

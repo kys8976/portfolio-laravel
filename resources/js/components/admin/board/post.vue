@@ -8,7 +8,7 @@
                 <div class="posts_container">
                     <div class="titlebar">
                         <div class="titlebar_item">
-                            <h1>posts</h1>
+                            <h1>Posts</h1>
                         </div>
                         <div class="titlebar_item">
                             <div
@@ -61,7 +61,9 @@
                         </div>
 
                         <div class="post_table-heading">
+                            <p>Board</p>
                             <p>Title</p>
+                            <p>Content</p>
                             <p>Actions</p>
                         </div>
                         <!-- items -->
@@ -71,7 +73,9 @@
                             v-for="item in posts"
                             :key="item.id"
                         >
+                            <p>{{ item.board.name }}</p>
                             <p>{{ item.title }}</p>
+                            <p>{{ item.content }}</p>
                             <div>
                                 <button
                                     class="btn-icon success"
@@ -111,28 +115,33 @@
                             "
                         >
                             <div>
-                                <p>post Name</p>
-                                <input
-                                    type="text"
-                                    class="input"
-                                    v-model="form.name"
-                                />
-
-                                <p>Icon Class</p>
-                                <input
-                                    type="text"
-                                    class="input"
-                                    v-model="form.icon"
-                                />
-                                <span style="color: #006fbb"
-                                    >Find your suitable icon: Font Awesome</span
+                                <p>Board</p>
+                                <select
+                                    class="inputSelect"
+                                    name=""
+                                    id=""
+                                    v-model="form.board_id"
                                 >
-
-                                <p>Description</p>
+                                    <option disabled>Select Board</option>
+                                    <option
+                                        :value="board.id"
+                                        v-for="board in boards"
+                                        :key="board.id"
+                                    >
+                                        {{ board.name }}
+                                    </option>
+                                </select>
+                                <p>Post Title</p>
+                                <input
+                                    type="text"
+                                    class="input"
+                                    v-model="form.title"
+                                />
+                                <p>Content</p>
                                 <textarea
                                     cols="10"
                                     rows="5"
-                                    v-model="form.description"
+                                    v-model="form.content"
                                 ></textarea>
                             </div>
                             <br />
@@ -172,9 +181,9 @@ import Base from "../layouts/base.vue";
 let posts = ref([]);
 let boards = ref([]);
 let form = ref({
-    name: "",
-    icon: "",
-    description: "",
+    title: "",
+    content: "",
+    board_id: "",
 });
 const showModal = ref(false);
 const hideModal = ref(true);
@@ -193,7 +202,7 @@ const getPosts = async () => {
 const getBoards = async () => {
     let response = await axios.get("/api/get_all_board");
     console.log(response);
-    boards.value = response.data.boards;
+    boards.value = response.data.services;
 };
 const openModal = () => {
     showModal.value = !showModal.value;

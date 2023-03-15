@@ -62,7 +62,7 @@ const routes = [
     },
     {
         //post
-        path: "/admin/post/:id",
+        path: "/admin/post",
         name: "adminPost",
         component: adminBoardPost,
         meta: {
