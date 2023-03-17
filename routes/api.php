@@ -6,6 +6,9 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\AboutController;
 use App\Http\Controllers\API\ServiceController;
 use App\Http\Controllers\API\SkillController;
+use App\Http\Controllers\API\EducationController;
+use App\Http\Controllers\API\ExperienceController;
+use App\Http\Controllers\API\ProjectController;
 use App\Http\Controllers\API\BoardController;
 use App\Http\Controllers\API\PostController;
 
@@ -47,6 +50,25 @@ Route::controller(SkillController::class)->group(function(){
     Route::post('/update_skill/{id}','update_skill');
     Route::get('/delete_skill/{id}','delete_skill');
 });
+Route::controller(EducationController::class)->group(function(){
+    Route::get('/get_all_education','get_all_education');
+    Route::post('/create_education', 'create_education');
+    Route::post('/update_education/{id}','update_education');
+    Route::get('/delete_education/{id}','delete_education');
+});
+Route::controller(ExperienceController::class)->group(function(){
+    Route::get('/get_all_experience','get_all_experience');
+    Route::post('/create_experience', 'create_experience');
+    Route::post('/update_experience/{id}','update_experience');
+    Route::get('/delete_experience/{id}','delete_experience');
+});
+Route::controller(ProjectController::class)->group(function(){
+    Route::get('/get_all_project','get_all_project');
+    Route::post('/create_project', 'create_project');
+    Route::post('/update_project/{id}','update_project');
+    Route::get('/delete_project/{id}','delete_project');
+});
+
 
 Route::controller(BoardController::class)->group(function(){
     Route::get('/get_all_board', [BoardController::class, 'get_all_board']);

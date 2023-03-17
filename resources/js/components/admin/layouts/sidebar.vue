@@ -39,64 +39,64 @@
                     </router-link>
                 </li>
                 <li class="nav_item">
-                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="education.html">
+                    <router-link :class="[{'nav__active': $route.name === 'adminEducaion'}, 'nav_link']"  to="/admin/educations">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-graduation-cap nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Education </span>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav_item">
-                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="experience.html">
+                    <router-link :class="[{'nav__active': $route.name === 'adminExperience'}, 'nav_link']"  to="/admin/experiences">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-blind nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname">
                             Experiences
                         </span>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav_item">
-                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="project.html">
+                    <router-link :class="[{'nav__active': $route.name === 'adminProject'}, 'nav_link']"  to="/admin/project">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-folder-open nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Projects </span>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav_item">
-                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="#">
+                    <router-link :class="[{'nav__active': $route.name === 'adminTestimonial'}, 'nav_link']"  to="/admin/testimonial">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-home nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname">
                             Testimonial
                         </span>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav_item">
-                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="#">
+                    <router-link :class="[{'nav__active': $route.name === 'adminMessage'}, 'nav_link']"  to="/admin/message">
                         <span class="nav_link--span--icon">
                             <i class="fa fa-envelope nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Messages </span>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav_item">
-                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="#">
+                    <router-link :class="[{'nav__active': $route.name === 'adminUser'}, 'nav_link']"  to="/admin/user">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-user nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Users </span>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav_item">
-                    <a :class="[{'nav__active': $route.name === 'adminHome'}, 'nav_link']" href="#">
+                    <router-link :class="[{'nav__active': $route.name === 'adminSetting'}, 'nav_link']"  to="/admin/setting">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-cog nav__link--icon"> </i>
                         </span>
                         <span class="nav_link--span--navname"> Setting </span>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav_item">
                     <router-link :class="[{'nav__active': $route.name === 'adminBoard'}, 'nav_link']" to="/admin/boards">

@@ -100,8 +100,11 @@
                 <!-------------- SERVICES MODAL --------------->
                 <div class="modal main__modal" :class="{ show: showModal }">
                     <div class="modal__content">
-                        <span class="modal__close btn__close--modal"
-                            @click="closeModal()">×</span>
+                        <span
+                            class="modal__close btn__close--modal"
+                            @click="closeModal()"
+                            >×</span
+                        >
                         <h3 class="modal__title">Add Skill</h3>
                         <hr class="modal_line" />
                         <br />

@@ -5,6 +5,13 @@ import homeAdminIndex from "../components/admin/home/index.vue";
 import adminAboutIndex from "../components/admin/about/index.vue";
 import adminServiceIndex from "../components/admin/services/index.vue";
 import adminSkillIndex from "../components/admin/skills/index.vue";
+import adminEducaionIndex from "../components/admin/education/index.vue";
+import adminExperiencesIndex from "../components/admin/experience/index.vue";
+import adminProjectIndex from "../components/admin/project/index.vue";
+import adminTestimonialIndex from "../components/admin/testimonial/index.vue";
+import adminMessagesIndex from "../components/admin/message/index.vue";
+import adminUsersIndex from "../components/admin/user/index.vue";
+import adminSettingIndex from "../components/admin/setting/index.vue";
 import adminBoardIndex from "../components/admin/board/index.vue";
 import adminBoardPost from "../components/admin/board/post.vue";
 
@@ -47,6 +54,69 @@ const routes = [
         path: "/admin/skills",
         name: "adminSkills",
         component: adminSkillIndex,
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
+        //educations
+        path: "/admin/educations",
+        name: "adminEducaion",
+        component: adminEducaionIndex,
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
+        //Experience
+        path: "/admin/experiences",
+        name: "adminExperience",
+        component: adminExperiencesIndex,
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
+        //Projects
+        path: "/admin/project",
+        name: "adminProject",
+        component: adminProjectIndex,
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
+        //Testimonial
+        path: "/admin/testimonial",
+        name: "adminTestimonial",
+        component: adminTestimonialIndex,
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
+        //Messages
+        path: "/admin/message",
+        name: "adminMessage",
+        component: adminMessagesIndex,
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
+        //Users
+        path: "/admin/user",
+        name: "adminUser",
+        component: adminUsersIndex,
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
+        //Setting
+        path: "/admin/setting",
+        name: "adminSettin",
+        component: adminSettingIndex,
         meta: {
             requiresAuth: true,
         },

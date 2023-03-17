@@ -3,15 +3,16 @@
     <main class="main">
         <div class="main__sideNav"></div>
         <div class="main__content">
-            <section class="skills section" id="skills">
-                <div class="skills_container">
+            <!--==================== EXPERIENCES ====================-->
+            <section class="experiences section" id="experiences">
+                <div class="experiences_container">
                     <div class="titlebar">
                         <div class="titlebar_item">
-                            <h1>Skills</h1>
+                            <h1>Experiences</h1>
                         </div>
                         <div class="titlebar_item">
                             <div class="btn" @click="openModal()">
-                                New Skill
+                                New Experience
                             </div>
                         </div>
                     </div>
@@ -37,7 +38,6 @@
                         <div class="table_search">
                             <div class="table_search-wrapper">
                                 <select
-                                    v-model="form.name"
                                     class="table_search-select"
                                     name=""
                                     id=""
@@ -51,35 +51,28 @@
                                 ></i>
                                 <input
                                     class="table_search--input"
-                                    v-model="form.proficiency"
                                     type="text"
-                                    placeholder="Search Service"
+                                    placeholder="Search Experience"
                                 />
                             </div>
                         </div>
 
-                        <div class="skill_table-heading">
-                            <p>Name</p>
-                            <p>Proficiency</p>
-                            <p>Service</p>
+                        <div class="experience_table-heading">
+                            <p>Company</p>
+                            <p>Period</p>
+                            <p>Position</p>
                             <p>Actions</p>
                         </div>
                         <!-- item 1 -->
                         <div
-                            class="skill_table-items"
-                            v-for="item in skills"
+                            class="experience_table-items"
+                            v-for="item in experiences"
                             :key="item.id"
-                            v-if="skills.length > 0"
+                            v-if="experiences.length > 0"
                         >
-                            <p>{{ item.name }}</p>
-                            <div class="table_skills-bar">
-                                <span
-                                    class="table_skills-percentage"
-                                    :style="{ width: `${item.proficiency}%` }"
-                                ></span>
-                                <strong>{{ item.proficiency }}%</strong>
-                            </div>
-                            <p v-if="item.service">{{ item.service.name }}</p>
+                            <p>{{ item.company }}</p>
+                            <p>{{ item.period }}</p>
+                            <p>{{ item.position }}</p>
                             <div>
                                 <button
                                     class="btn-icon success"
@@ -89,7 +82,7 @@
                                 </button>
                                 <button
                                     class="btn-icon danger"
-                                    @click="deleteSkill(item.id)"
+                                    @click="deleteExperience(item.id)"
                                 >
                                     <i class="far fa-trash-alt"></i>
                                 </button>
@@ -97,50 +90,45 @@
                         </div>
                     </div>
                 </div>
-                <!-------------- SERVICES MODAL --------------->
+                <!-------------- EXPERIENCE MODAL --------------->
                 <div class="modal main__modal" :class="{ show: showModal }">
                     <div class="modal__content">
-                        <span class="modal__close btn__close--modal"
-                            @click="closeModal()">×</span>
-                        <h3 class="modal__title">Add Skill</h3>
+                        <span
+                            class="modal__close btn__close--modal"
+                            @click="closeModal()"
+                            >×</span
+                        >
+                        <h3 class="modal__title">Add Experience</h3>
                         <hr class="modal_line" />
                         <br />
                         <form
                             @submit.prevent="
-                                editMode ? updateSkill() : createSkill()
+                                editMode
+                                    ? updateExperience()
+                                    : createExperience()
                             "
                         >
                             <div>
-                                <p>Name</p>
+                                <p>Company</p>
                                 <input
                                     type="text"
                                     class="input"
-                                    v-model="form.name"
+                                    v-model="form.company"
                                 />
 
-                                <p>Proficiency</p>
+                                <p>Period</p>
                                 <input
                                     type="text"
                                     class="input"
-                                    v-model="form.proficiency"
+                                    v-model="form.period"
                                 />
 
-                                <p>Service</p>
-                                <select
-                                    class="inputSelect"
-                                    name=""
-                                    id=""
-                                    v-model="form.service_id"
-                                >
-                                    <option disabled>Select Service</option>
-                                    <option
-                                        :value="service.id"
-                                        v-for="service in services"
-                                        :key="service.id"
-                                    >
-                                        {{ service.name }}
-                                    </option>
-                                </select>
+                                <p>Position</p>
+                                <input
+                                    type="text"
+                                    class="input"
+                                    v-model="form.position"
+                                />
                             </div>
                             <br />
                             <hr class="modal_line" />
@@ -176,32 +164,25 @@
 import Base from "../layouts/base.vue";
 import { onMounted, ref } from "vue";
 
-let skills = ref([]);
+let experiences = ref([]);
 let services = ref([]);
 let form = ref({
-    name: "",
-    proficiency: "",
-    service_id: "",
+    company: "",
+    period: "",
+    position: "",
 });
 const showModal = ref(false);
 const hideModal = ref(true);
 const editMode = ref(true);
 
 onMounted(async () => {
-    getSkills();
-    getServices();
+    getExperiences();
 });
 
-const getSkills = async () => {
-    let response = await axios.get("/api/get_all_skill");
+const getExperiences = async () => {
+    let response = await axios.get("/api/get_all_experience");
     console.log(response);
-    skills.value = response.data.skills;
-};
-
-const getServices = async () => {
-    let response = await axios.get("/api/get_all_service");
-    console.log(response);
-    services.value = response.data.services;
+    experiences.value = response.data.experiences;
 };
 
 const openModal = () => {
@@ -214,14 +195,14 @@ const closeModal = () => {
     form.value = {};
 };
 
-const createSkill = async () => {
+const createExperience = async () => {
     console.log("create");
-    await axios.post("/api/create_skill", form.value).then((response) => {
-        getSkills();
+    await axios.post("/api/create_experience", form.value).then((response) => {
+        getExperiences();
         closeModal();
         toast.fire({
             icon: "success",
-            title: "Skill add Successfully",
+            title: "Experience add Successfully",
         });
     });
 };
@@ -232,20 +213,20 @@ const editModal = (service) => {
     form.value = service;
 };
 
-const updateSkill = async () => {
+const updateExperience = async () => {
     await axios
-        .post("/api/update_skill/" + form.value.id, form.value)
+        .post("/api/update_experience/" + form.value.id, form.value)
         .then((response) => {
-            getSkills();
+            getExperiences();
             closeModal();
             toast.fire({
                 icon: "success",
-                title: "Skill update Successfully",
+                title: "Experience update Successfully",
             });
         });
 };
 
-const deleteSkill = async (id) => {
+const deleteExperience = async (id) => {
     Swal.fire({
         title: "Are yot Sure ?",
         text: "You can't go back",
@@ -256,9 +237,13 @@ const deleteSkill = async (id) => {
         confirmButtonText: "Yes, delete it!",
     }).then((result) => {
         if (result.value) {
-            axios.get("/api/delete_skill/" + id).then((response) => {
-                Swal.fire("Delete", "Skill delete successfully", "success");
-                getSkills();
+            axios.get("/api/delete_experience/" + id).then((response) => {
+                Swal.fire(
+                    "Delete",
+                    "Experience delete successfully",
+                    "success"
+                );
+                getExperiences();
             });
         }
     });

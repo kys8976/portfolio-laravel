@@ -3,15 +3,16 @@
     <main class="main">
         <div class="main__sideNav"></div>
         <div class="main__content">
-            <section class="skills section" id="skills">
+            <!--==================== EDUCATIONS ====================-->
+            <section class="educations section" id="educations">
                 <div class="skills_container">
                     <div class="titlebar">
                         <div class="titlebar_item">
-                            <h1>Skills</h1>
+                            <h1>Educations</h1>
                         </div>
                         <div class="titlebar_item">
                             <div class="btn" @click="openModal()">
-                                New Skill
+                                New Education
                             </div>
                         </div>
                     </div>
@@ -37,7 +38,6 @@
                         <div class="table_search">
                             <div class="table_search-wrapper">
                                 <select
-                                    v-model="form.name"
                                     class="table_search-select"
                                     name=""
                                     id=""
@@ -51,35 +51,28 @@
                                 ></i>
                                 <input
                                     class="table_search--input"
-                                    v-model="form.proficiency"
                                     type="text"
-                                    placeholder="Search Service"
+                                    placeholder="Search Education"
                                 />
                             </div>
                         </div>
 
-                        <div class="skill_table-heading">
-                            <p>Name</p>
-                            <p>Proficiency</p>
-                            <p>Service</p>
+                        <div class="education_table-heading">
+                            <p>Institution</p>
+                            <p>Period</p>
+                            <p>Degree</p>
+                            <p>Department</p>
                             <p>Actions</p>
                         </div>
                         <!-- item 1 -->
-                        <div
-                            class="skill_table-items"
-                            v-for="item in skills"
+                        <div class="education_table-items"
+                            v-for="item in educations"
                             :key="item.id"
-                            v-if="skills.length > 0"
-                        >
-                            <p>{{ item.name }}</p>
-                            <div class="table_skills-bar">
-                                <span
-                                    class="table_skills-percentage"
-                                    :style="{ width: `${item.proficiency}%` }"
-                                ></span>
-                                <strong>{{ item.proficiency }}%</strong>
-                            </div>
-                            <p v-if="item.service">{{ item.service.name }}</p>
+                            v-if="educations.length > 0">
+                            <p>{{ item.institution }}</p>
+                            <p>{{ item.period }}</p>
+                            <p>{{ item.degree }}</p>
+                            <p>{{ item.department }}</p>
                             <div>
                                 <button
                                     class="btn-icon success"
@@ -89,7 +82,7 @@
                                 </button>
                                 <button
                                     class="btn-icon danger"
-                                    @click="deleteSkill(item.id)"
+                                    @click="deleteEducation(item.id)"
                                 >
                                     <i class="far fa-trash-alt"></i>
                                 </button>
@@ -97,50 +90,49 @@
                         </div>
                     </div>
                 </div>
-                <!-------------- SERVICES MODAL --------------->
+                <!-------------- EDUCATION MODAL --------------->
                 <div class="modal main__modal" :class="{ show: showModal }">
                     <div class="modal__content">
-                        <span class="modal__close btn__close--modal"
-                            @click="closeModal()">×</span>
-                        <h3 class="modal__title">Add Skill</h3>
+                        <span
+                            class="modal__close btn__close--modal"
+                            @click="closeModal()"
+                            >×</span>
+                        <h3 class="modal__title">Add Education</h3>
                         <hr class="modal_line" />
                         <br />
                         <form
                             @submit.prevent="
-                                editMode ? updateSkill() : createSkill()
+                                editMode ? updateEducations() : createEducations()
                             "
                         >
                             <div>
-                                <p>Name</p>
+                                <p>Institution</p>
                                 <input
                                     type="text"
                                     class="input"
-                                    v-model="form.name"
+                                    v-model="form.institution"
                                 />
 
-                                <p>Proficiency</p>
+                                <p>Period</p>
                                 <input
                                     type="text"
                                     class="input"
-                                    v-model="form.proficiency"
+                                    v-model="form.period"
                                 />
 
-                                <p>Service</p>
-                                <select
-                                    class="inputSelect"
-                                    name=""
-                                    id=""
-                                    v-model="form.service_id"
-                                >
-                                    <option disabled>Select Service</option>
-                                    <option
-                                        :value="service.id"
-                                        v-for="service in services"
-                                        :key="service.id"
-                                    >
-                                        {{ service.name }}
-                                    </option>
-                                </select>
+                                <p>Degree</p>
+                                <input
+                                    type="text"
+                                    class="input"
+                                    v-model="form.degree"
+                                />
+
+                                <p>Department</p>
+                                <input
+                                    type="text"
+                                    class="input"
+                                    v-model="form.department"
+                                />
                             </div>
                             <br />
                             <hr class="modal_line" />
@@ -176,33 +168,27 @@
 import Base from "../layouts/base.vue";
 import { onMounted, ref } from "vue";
 
-let skills = ref([]);
-let services = ref([]);
+let educations = ref([]);
 let form = ref({
-    name: "",
-    proficiency: "",
-    service_id: "",
+    institution: "",
+    period: "",
+    degree: "",
+    department: "",
 });
 const showModal = ref(false);
 const hideModal = ref(true);
 const editMode = ref(true);
 
 onMounted(async () => {
-    getSkills();
-    getServices();
+    getEducations();
 });
 
-const getSkills = async () => {
-    let response = await axios.get("/api/get_all_skill");
+const getEducations = async () => {
+    let response = await axios.get("/api/get_all_education");
     console.log(response);
-    skills.value = response.data.skills;
+    educations.value = response.data.educations;
 };
 
-const getServices = async () => {
-    let response = await axios.get("/api/get_all_service");
-    console.log(response);
-    services.value = response.data.services;
-};
 
 const openModal = () => {
     showModal.value = !showModal.value;
@@ -214,14 +200,14 @@ const closeModal = () => {
     form.value = {};
 };
 
-const createSkill = async () => {
+const createEducations = async () => {
     console.log("create");
-    await axios.post("/api/create_skill", form.value).then((response) => {
-        getSkills();
+    await axios.post("/api/create_education", form.value).then((response) => {
+        getEducations();
         closeModal();
         toast.fire({
             icon: "success",
-            title: "Skill add Successfully",
+            title: "Education add Successfully",
         });
     });
 };
@@ -232,20 +218,20 @@ const editModal = (service) => {
     form.value = service;
 };
 
-const updateSkill = async () => {
+const updateEducations = async () => {
     await axios
-        .post("/api/update_skill/" + form.value.id, form.value)
+        .post("/api/update_education/" + form.value.id, form.value)
         .then((response) => {
-            getSkills();
+            getEducations();
             closeModal();
             toast.fire({
                 icon: "success",
-                title: "Skill update Successfully",
+                title: "Education update Successfully",
             });
         });
 };
 
-const deleteSkill = async (id) => {
+const deleteEducation = async (id) => {
     Swal.fire({
         title: "Are yot Sure ?",
         text: "You can't go back",
@@ -256,9 +242,9 @@ const deleteSkill = async (id) => {
         confirmButtonText: "Yes, delete it!",
     }).then((result) => {
         if (result.value) {
-            axios.get("/api/delete_skill/" + id).then((response) => {
-                Swal.fire("Delete", "Skill delete successfully", "success");
-                getSkills();
+            axios.get("/api/delete_education/" + id).then((response) => {
+                Swal.fire("Education", "Education delete successfully", "success");
+                getEducations();
             });
         }
     });

@@ -20,7 +20,7 @@
         <header class="header" id="header">
             <nav class="nav container">
                 <a href="#home" class="nav_logo">
-                    Andrew Kwon
+                    John Doe
                 </a>
 
                 <div class="nav_menu" id="nav-menu">
@@ -70,11 +70,11 @@
             <section class="home section" id="home">
                 <div class="home_container container grid">
                     <div class="home_img">
-                        <img src="assets/img/home.png" alt="" style="margin-top: -50px; margin-left: -41px;">
+                        <img src="assets/img/home.png" alt="" >
                     </div>
 
                     <div class="home_data">
-                        <h1 class="home_title">Hi, I'am Andrew Kwon</h1>
+                        <h1 class="home_title">Hi, I'am John Doe</h1>
                         <h3 class="home_subtitle">FullStack Web developer</h3>
                         <p class="home_description">
                             High level experience in web design,fornt-en and backend development, producing quality work.
@@ -905,7 +905,7 @@
           <div class="footer_bg">
             <div class="footer_container container grid">
                 <div>
-                    <h1 class="footer_title">Andrew Kwon</h1>
+                    <h1 class="footer_title">John Doe</h1>
                     <span class="footer_subtitle">FullStack Web developer</span>
                     <p class="footer_subtitle">
                         High level experience in web design,
