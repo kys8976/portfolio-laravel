@@ -8,6 +8,8 @@ import adminSkillIndex from "../components/admin/skills/index.vue";
 import adminEducaionIndex from "../components/admin/education/index.vue";
 import adminExperiencesIndex from "../components/admin/experience/index.vue";
 import adminProjectIndex from "../components/admin/project/index.vue";
+import adminProjectNew from "../components/admin/project/new.vue";
+import adminProjectEdit from "../components/admin/project/edit.vue";
 import adminTestimonialIndex from "../components/admin/testimonial/index.vue";
 import adminMessagesIndex from "../components/admin/message/index.vue";
 import adminUsersIndex from "../components/admin/user/index.vue";
@@ -78,12 +80,31 @@ const routes = [
     },
     {
         //Projects
-        path: "/admin/project",
-        name: "adminProject",
+        path: "/admin/projects",
+        name: "adminProjects",
         component: adminProjectIndex,
         meta: {
             requiresAuth: true,
         },
+    },
+    {
+        //Project New
+        path: "/admin/projects/new",
+        name: "adminProjectNew",
+        component: adminProjectNew,
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
+        //Project Edit
+        path: "/admin/projects/edit/:id",
+        name: "adminProjectEdit",
+        component: adminProjectEdit,
+        meta: {
+            requiresAuth: true,
+        },
+        props: true
     },
     {
         //Testimonial

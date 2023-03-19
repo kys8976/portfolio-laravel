@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\Project;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ProjectController extends Controller
 {
@@ -16,19 +17,42 @@ class ProjectController extends Controller
         ],200);
     }
 
-    public function create_project(Request $request){
+    public function get_edit_project($id){
+        $project = Project::find($id);
+        return response()->json([
+            'project' => $project
+        ],200);
+    }
+
+    public function add_project(Request $request){
 
         $this->validate($request,[
             'title' => 'required',
             'description' => 'required',
             'link' => 'required',
-            'photo' => 'required'
         ]);
         $project = new Project();
         $project->title = $request->title;
         $project->description = $request->description;
         $project->link = $request->link;
-        $project->photo = $request->photo;
+
+        if($request->photo){
+            $strpos = strpos($request->photo,';');
+            $sub = strstr($request->photo,0,$strpos);
+            $ex = explode('/',$sub)[1];
+            $ex2 = explode(';',$ex);
+            $name = time().".".$ex2[0];
+            $img = Image::make($request->photo)->resize(700,500);
+            $upload_path = public_path()."/img/upload/";
+            $image = $upload_path.$project->photo;
+            $img->save($upload_path.$name);
+            if(file_exists($image)){
+                @unlink($image);
+            }
+        }else{
+            $name = $project->photo;
+        }
+        $project->photo = $name;
         $project->save();
     }
 
@@ -38,17 +62,39 @@ class ProjectController extends Controller
             'title' => 'required',
             'description' => 'required',
             'link' => 'required',
-            'photo' => 'required'
         ]);
         $project->title = $request->title;
         $project->description = $request->description;
         $project->link = $request->link;
-        $project->photo = $request->photo;
+
+        if($project->photo != $request->photo){
+            $strpos = strpos($request->photo,';');
+            $sub = strstr($request->photo,0,$strpos);
+            $ex = explode('/',$sub)[1];
+            $ex2 = explode(';',$ex);
+            $name = time().".".$ex2[0];
+            $img = Image::make($request->photo)->resize(700,500);
+            $upload_path = public_path()."/img/upload/";
+            $image = $upload_path.$project->photo;
+            $img->save($upload_path.$name);
+            if(file_exists($image)){
+                @unlink($image);
+            }
+        }else{
+            $name = $project->photo;
+        }
+        $project->photo = $name;
         $project->save();
     }
 
     public function delete_project(Request $request, $id){
         $project = Project::findOrFail($id);
+        $image_path = public_path()."img/upload/";
+        $image = $image_path.$project->photo;
+        if(file_exists($image)){
+            @unlink($image);
+        }
         $project->delete();
     }
+
 }

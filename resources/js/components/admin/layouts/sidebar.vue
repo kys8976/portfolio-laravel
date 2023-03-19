@@ -57,7 +57,7 @@
                     </router-link>
                 </li>
                 <li class="nav_item">
-                    <router-link :class="[{'nav__active': $route.name === 'adminProject'}, 'nav_link']"  to="/admin/project">
+                    <router-link :class="[{'nav__active': $route.name === 'adminProjects'}, 'nav_link']"  to="/admin/projects">
                         <span class="nav_link--span--icon">
                             <i class="fas fa-folder-open nav__link--icon"> </i>
                         </span>
