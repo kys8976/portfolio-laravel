@@ -9,6 +9,7 @@ use App\Http\Controllers\API\SkillController;
 use App\Http\Controllers\API\EducationController;
 use App\Http\Controllers\API\ExperienceController;
 use App\Http\Controllers\API\ProjectController;
+use App\Http\Controllers\API\TestimonialController;
 use App\Http\Controllers\API\BoardController;
 use App\Http\Controllers\API\PostController;
 
@@ -68,6 +69,14 @@ Route::controller(ProjectController::class)->group(function(){
     Route::post('/update_project/{id}','update_project');
     Route::get('/get_edit_project/{id}','get_edit_project');
     Route::get('/delete_project/{id}','delete_project');
+});
+
+Route::controller(TestimonialController::class)->group(function(){
+    Route::get('/get_all_testimonials','get_all_testimonials');
+    Route::post('/add_testimonial', 'add_testimonial');
+    Route::post('/update_testimonial/{id}','update_testimonial');
+    Route::get('/get_edit_testimonial/{id}','get_edit_testimonial');
+    Route::get('/delete_testimonials/{id}','delete_testimonials');
 });
 
 

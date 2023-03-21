@@ -11,6 +11,8 @@ import adminProjectIndex from "../components/admin/project/index.vue";
 import adminProjectNew from "../components/admin/project/new.vue";
 import adminProjectEdit from "../components/admin/project/edit.vue";
 import adminTestimonialIndex from "../components/admin/testimonial/index.vue";
+import adminTestimonialNew from "../components/admin/testimonial/new.vue";
+import adminTestimonialEdit from "../components/admin/testimonial/edit.vue";
 import adminMessagesIndex from "../components/admin/message/index.vue";
 import adminUsersIndex from "../components/admin/user/index.vue";
 import adminSettingIndex from "../components/admin/setting/index.vue";
@@ -114,6 +116,25 @@ const routes = [
         meta: {
             requiresAuth: true,
         },
+    },
+    {
+        //Testimonial New
+        path: "/admin/testimonial/new",
+        name: "adminTestimonialNew",
+        component: adminTestimonialNew,
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
+        //Testimonial Edit
+        path: "/admin/testimonial/edit/:id",
+        name: "adminTestimonialEdit",
+        component: adminTestimonialEdit,
+        meta: {
+            requiresAuth: true,
+        },
+        props: true
     },
     {
         //Messages
