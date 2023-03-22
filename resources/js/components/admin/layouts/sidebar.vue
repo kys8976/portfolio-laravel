@@ -90,6 +90,7 @@
                         <span class="nav_link--span--navname"> Users </span>
                     </router-link>
                 </li>
+ <!--
                 <li class="nav_item">
                     <router-link :class="[{'nav__active': $route.name === 'adminSetting'}, 'nav_link']"  to="/admin/setting">
                         <span class="nav_link--span--icon">
@@ -98,6 +99,7 @@
                         <span class="nav_link--span--navname"> Setting </span>
                     </router-link>
                 </li>
+-->
                 <li class="nav_item">
                     <router-link :class="[{'nav__active': $route.name === 'adminBoard'}, 'nav_link']" to="/admin/boards">
                         <span class="nav_link--span--icon">

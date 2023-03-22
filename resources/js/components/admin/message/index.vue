@@ -3,17 +3,14 @@
     <main class="main">
         <div class="main__sideNav"></div>
         <div class="main__content">
-            <section class="skills section" id="skills">
-                <div class="skills_container">
+            <!--==================== MESSAGES ====================-->
+            <section class="messages section" id="messages">
+                <div class="messages_container">
                     <div class="titlebar">
                         <div class="titlebar_item">
-                            <h1>Skills</h1>
+                            <h1>Messages</h1>
                         </div>
-                        <div class="titlebar_item">
-                            <div class="btn" @click="openModal()">
-                                New Skill
-                            </div>
-                        </div>
+                        <div class="titlebar_item"></div>
                     </div>
 
                     <div class="table">
@@ -37,7 +34,6 @@
                         <div class="table_search">
                             <div class="table_search-wrapper">
                                 <select
-                                    v-model="form.name"
                                     class="table_search-select"
                                     name=""
                                     id=""
@@ -51,123 +47,39 @@
                                 ></i>
                                 <input
                                     class="table_search--input"
-                                    v-model="form.proficiency"
                                     type="text"
-                                    placeholder="Search Service"
+                                    placeholder="Search Message"
                                 />
                             </div>
                         </div>
 
-                        <div class="skill_table-heading">
+                        <div class="message_table-heading">
                             <p>Name</p>
-                            <p>Proficiency</p>
-                            <p>Service</p>
+                            <p>Email</p>
+                            <p>Subject</p>
+                            <p>Description</p>
+                            <p>Status</p>
                             <p>Actions</p>
                         </div>
                         <!-- item 1 -->
-                        <div
-                            class="skill_table-items"
-                            v-for="item in skills"
-                            :key="item.id"
-                            v-if="skills.length > 0"
-                        >
+                        <div class="message_table-items"
+                            v-if="message.length > 0"
+                            v-for="item in message"
+                            :key="item.id">
                             <p>{{ item.name }}</p>
-                            <div class="table_skills-bar">
-                                <span
-                                    class="table_skills-percentage"
-                                    :style="{ width: `${item.proficiency}%` }"
-                                ></span>
-                                <strong>{{ item.proficiency }}%</strong>
-                            </div>
-                            <p v-if="item.service">{{ item.service.name }}</p>
+                            <p>{{ item.email }}</p>
+                            <p>{{ item.subject }}</p>
+                            <p>{{ item.description }}</p>
+                            <p>
+                                <span class="badge_read" v-if="item.status == 1" @click="updateStatus(item.id,0)"> Read </span>
+                                <span class="badge_unread" v-else  @click="updateStatus(item.id,1)"> Unread </span>
+                            </p>
                             <div>
-                                <button
-                                    class="btn-icon success"
-                                    @click="editModal(item)"
-                                >
-                                    <i class="fas fa-pencil-alt"></i>
-                                </button>
-                                <button
-                                    class="btn-icon danger"
-                                    @click="deleteSkill(item.id)"
-                                >
+                                <button class="btn-icon danger" @click="deleteMessage(item.id)">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-------------- SERVICES MODAL --------------->
-                <div class="modal main__modal" :class="{ show: showModal }">
-                    <div class="modal__content">
-                        <span
-                            class="modal__close btn__close--modal"
-                            @click="closeModal()"
-                            >×</span
-                        >
-                        <h3 class="modal__title">Add Skill</h3>
-                        <hr class="modal_line" />
-                        <br />
-                        <form
-                            @submit.prevent="
-                                editMode ? updateSkill() : createSkill()
-                            "
-                        >
-                            <div>
-                                <p>Name</p>
-                                <input
-                                    type="text"
-                                    class="input"
-                                    v-model="form.name"
-                                />
-
-                                <p>Proficiency</p>
-                                <input
-                                    type="text"
-                                    class="input"
-                                    v-model="form.proficiency"
-                                />
-
-                                <p>Service</p>
-                                <select
-                                    class="inputSelect"
-                                    name=""
-                                    id=""
-                                    v-model="form.service_id"
-                                >
-                                    <option disabled>Select Service</option>
-                                    <option
-                                        :value="service.id"
-                                        v-for="service in services"
-                                        :key="service.id"
-                                    >
-                                        {{ service.name }}
-                                    </option>
-                                </select>
-                            </div>
-                            <br />
-                            <hr class="modal_line" />
-                            <div class="model__footer">
-                                <button
-                                    class="btn mr-2 btn__close--modal"
-                                    @click="closeModal()"
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    class="btn btn-secondary"
-                                    v-show="editMode == false"
-                                >
-                                    Save
-                                </button>
-                                <button
-                                    class="btn btn-secondary"
-                                    v-show="editMode == true"
-                                >
-                                    Update
-                                </button>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </section>
@@ -179,8 +91,7 @@
 import Base from "../layouts/base.vue";
 import { onMounted, ref } from "vue";
 
-let skills = ref([]);
-let services = ref([]);
+let message = ref([]);
 let form = ref({
     name: "",
     proficiency: "",
@@ -191,64 +102,32 @@ const hideModal = ref(true);
 const editMode = ref(true);
 
 onMounted(async () => {
-    getSkills();
-    getServices();
+    getMessage();
 });
 
-const getSkills = async () => {
-    let response = await axios.get("/api/get_all_skill");
+const getMessage = async () => {
+    let response = await axios.get("/api/get_all_message");
     console.log(response);
-    skills.value = response.data.skills;
+    message.value = response.data.messages;
 };
 
-const getServices = async () => {
-    let response = await axios.get("/api/get_all_service");
-    console.log(response);
-    services.value = response.data.services;
-};
 
-const openModal = () => {
-    showModal.value = !showModal.value;
-    editMode.value = false;
-};
+const updateStatus =  (id,status) => {
+    const formData = new FormData()
+    formData.append('status',status)
+    console.log(status)
 
-const closeModal = () => {
-    showModal.value = !hideModal.value;
-    form.value = {};
-};
-
-const createSkill = async () => {
-    console.log("create");
-    await axios.post("/api/create_skill", form.value).then((response) => {
-        getSkills();
-        closeModal();
-        toast.fire({
-            icon: "success",
-            title: "Skill add Successfully",
-        });
-    });
-};
-
-const editModal = (service) => {
-    editMode.value = true;
-    showModal.value = !showModal.value;
-    form.value = service;
-};
-
-const updateSkill = async () => {
-    await axios
-        .post("/api/update_skill/" + form.value.id, form.value)
+    axios.post("/api/change_status/" + id, formData)
         .then((response) => {
-            getSkills();
-            closeModal();
             toast.fire({
                 icon: "success",
-                title: "Skill update Successfully",
+                title: "Status Change Successfully",
             });
+            getMessage();
         });
 };
 
-const deleteSkill = async (id) => {
+const deleteMessage = async (id) => {
     Swal.fire({
         title: "Are yot Sure ?",
         text: "You can't go back",
@@ -259,9 +138,9 @@ const deleteSkill = async (id) => {
         confirmButtonText: "Yes, delete it!",
     }).then((result) => {
         if (result.value) {
-            axios.get("/api/delete_skill/" + id).then((response) => {
-                Swal.fire("Delete", "Skill delete successfully", "success");
-                getSkills();
+            axios.get("/api/delete_message/" + id).then((response) => {
+                Swal.fire("Delete", "Message delete successfully", "success");
+                getMessage();
             });
         }
     });
