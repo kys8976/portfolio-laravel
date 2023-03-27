@@ -87,7 +87,8 @@ Route::controller(MessageController::class)->group(function(){
 
 Route::controller(UserContorller::class)->group(function(){
     Route::get('/get_all_user','get_all_user');
-    Route::post('/change_status/{id}','change_status');
+    Route::post('/create_user','create_user');
+    Route::post('/update_user/{id}','update_user');
     Route::get('/delete_user/{id}','delete_user');
 });
 
