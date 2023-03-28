@@ -83,10 +83,10 @@
                             <p>{{ item.name }}</p>
                             <p>{{ item.type }}</p>
                             <div>
-                                <button class="btn-icon success">
+                                <button class="btn-icon success" @click="editModal(item)">
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>
-                                <button class="btn-icon danger">
+                                <button class="btn-icon danger" @click="deleteUser(item.id)">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
                             </div>
@@ -97,8 +97,10 @@
             <!-------------- USER MODAL --------------->
             <div class="modal main__modal" :class="{ show: showModal }">
                 <div class="modal__content">
-                    <span class="modal__close btn__close--modal">×</span>
-                    <h3 class="modal__title">Add User</h3>
+                        <span class="modal__close btn__close--modal"
+                            @click="closeModal()">×</span>
+                        <h3 class="modal__title" v-show="editMode == false">Add User</h3>
+                        <h3 class="modal__title" v-show="editMode == true">Update User</h3>
                     <hr class="modal_line" />
                     <br />
                     <form
@@ -140,7 +142,8 @@
                                 <option value="user">Standard User</option>
                             </select>
 
-                            <p>Password</p>
+                            <p v-show="editMode == false">Password</p>
+                            <p v-show="editMode == true">Password(Leave blank if you don't want to change)</p>
                             <input
                                 type="password"
                                 id="password"
@@ -211,6 +214,7 @@ const ourImage = (img) => {
 
 const openModal = () => {
     showModal.value = !showModal.value;
+    form.value = ({})
     editMode.value = false;
 };
 
@@ -237,10 +241,10 @@ const createUser = async () => {
     })
 };
 
-const editModal = (service) => {
+const editModal = (item) => {
     editMode.value = true;
     showModal.value = !showModal.value;
-    form.value = service;
+    form.value = item;
 };
 
 const updateUser = async () => {
@@ -256,7 +260,7 @@ const updateUser = async () => {
         });
 };
 
-const deleteuser = async (id) => {
+const deleteUser = async (id) => {
     Swal.fire({
         title: "Are yot Sure ?",
         text: "You can't go back",
