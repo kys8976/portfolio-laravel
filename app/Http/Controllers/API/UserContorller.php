@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 
@@ -85,6 +86,42 @@ class UserContorller extends Controller
         $user->save();
     }
 
+    public function update_profile(Request $request, $id){
+        $user = User::find($id);
+        $this->validate($request,[
+            'name' => 'required|min:2|max:20',
+            'email' => 'required',
+        ]);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->type = $request->type;
+        $user->bio = $request->bio;
+
+        if($request->password == 'undefind'){
+            $user->password =$user->password;
+        }else{
+            $user->password = Hash::make($request->password);
+        }
+
+        if($user->photo != $request->photo){
+            $strpos = strpos($request->photo,';');
+            $sub = strstr($request->photo,0,$strpos);
+            $ex = explode('/',$sub)[1];
+            $ex2 = explode(';',$ex);
+            $name = time().".".$ex2[0];
+            $img = Image::make($request->photo)->resize(700,500);
+            $upload_path = public_path()."/img/upload/";
+            $image = $upload_path.$user->photo;
+            $img->save($upload_path.$name);
+            if(file_exists($image)){
+                @unlink($image);
+            }
+        }else{
+            $name = $user->photo;
+        }
+        $user->photo = $name;
+        $user->save();
+    }
     public function delete_user(Request $request, $id){
         $user = User::findOrFail($id);
         $image_path = public_path()."img/upload/";
@@ -93,5 +130,9 @@ class UserContorller extends Controller
             @unlink($image);
         }
         $user->delete();
+    }
+
+    public function profile(){
+        return Auth::user();
     }
 }

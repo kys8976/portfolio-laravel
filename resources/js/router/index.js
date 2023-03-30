@@ -18,6 +18,7 @@ import adminUsersIndex from "../components/admin/user/index.vue";
 import adminSettingIndex from "../components/admin/setting/index.vue";
 import adminBoardIndex from "../components/admin/board/index.vue";
 import adminBoardPost from "../components/admin/board/post.vue";
+import adminUserProfile from "../components/admin/user/profile.vue";
 
 
 
@@ -150,6 +151,15 @@ const routes = [
         path: "/admin/user",
         name: "adminUser",
         component: adminUsersIndex,
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
+        //Users
+        path: "/admin/users/profile",
+        name: "adminProfile",
+        component: adminUserProfile,
         meta: {
             requiresAuth: true,
         },

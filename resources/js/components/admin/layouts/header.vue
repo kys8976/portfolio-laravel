@@ -46,7 +46,7 @@
             </span>
             <ul class="header_profile-name--nav--list">
                 <li class="header_profile-name--nav--item">
-                    <a class="header_profile-name--nav--link" href="#">
+                    <a class="header_profile-name--nav--link" href="#" @click="myProfile()">
                         Profile
                     </a>
                 </li>
@@ -77,11 +77,13 @@ const openNavHeader = () => {
     showNavHeader.value = !showNavHeader.value;
 };
 
-
-
 const logout = () => {
     localStorage.removeItem("token");
     router.push("/");
 };
+
+const myProfile =() =>{
+    router.push("/admin/users/profile");
+}
 
 </script>
